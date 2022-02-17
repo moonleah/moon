@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.omp.matchroom.mapper.StoreMapper">
+  		
+    
+	<select id="getStoreList" parameterType="RestResultVO" resultType="RestResultVO">
+  	SELECT A.store_id , A.store_name , A.store_address ,A.store_address_road, B.room_id , B.room_name, B.room_capacity , B.room_status , B.useflag 
+  	FROM omp_store A 
+	LEFT JOIN omp_room B ON A.store_name = B.r_store_name 
+  	<include refid="searchFlag"/>
+  	order by A.store_id DESC
+	</select>
+  
+  	
+  	<sql id="searchFlag">
+  	  	<trim prefix=" WHERE " prefixOverrides="AND">
+	  		<if test="searchStoreName!=null || searchStoreAddress!=null || searchCapacity !=0">	
+		  		<if test="searchStoreName != null and searchStoreName != ''">
+			 		A.store_name LIKE concat('%', #{searchStoreName}, '%')
+			 	</if>
+			    <if test="searchStoreAddress != null and searchStoreAddress != ''">
+			 		and A.store_address LIKE concat('%', #{searchStoreAddress}, '%')  
+			 	</if>
+			 	<if test="searchCapacity != 0 ">
+			 		and B.room_capacity LIKE concat('%', #{searchCapacity}, '%')  
+			 	</if>
+			 </if>
+	 	</trim>
+  	</sql>
+  	
+  	<insert id="storeInsert" parameterType="RestResultVO">
+  	INSERT 
+		INTO OMP_STORE
+		(
+				STORE_TYPE_NAME , PMS_NUM , STORE_NAME , OWNER_NAME , STORE_ADDRESS_ROAD ,STORE_ADDRESS , STORE_AREA , POSTAL_CODE
+			) VALUES
+		<foreach collection="storeList" item="store" index="idx" separator=" , ">
+			(
+				#{store.storeTypeName},#{store.pmsNum} ,#{store.storeName},#{store.ownerName},#{store.storeAddressRoad},
+				#{store.storeAddress},#{store.storeArea},#{store.postalCode}
+			)
+		</foreach>
+  	
+  	</insert>
+  	
+
+</mapper>

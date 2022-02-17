@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <settings>
+        <setting name="mapUnderscoreToCamelCase" value="true" />
+        <setting name="callSettersOnNulls" value="true"/>
+        <setting name="jdbcTypeForNull" value="NULL"/>
+    </settings>
+    
+     <typeAliases>
+   			<typeAlias type="com.omp.matchroom.vo.StoreVO" alias="StoreVO"/>
+   			<typeAlias type="com.omp.matchroom.vo.RestResultVO" alias="RestResultVO"/>
+   			<typeAlias type="com.omp.matchroom.vo.UserVO" alias="UserVO"/>
+	</typeAliases>
+	
+</configuration>
+
