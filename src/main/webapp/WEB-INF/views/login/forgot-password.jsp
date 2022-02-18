@@ -10,7 +10,7 @@
     <meta name="author" content="">
 
     <title>SB Admin 2 - Forgot Password</title>
-<%@ include file="../include.jsp" %>
+<%@ include file="../layout/include.jsp" %>
     <!-- Custom fonts for this template-->
     
 
