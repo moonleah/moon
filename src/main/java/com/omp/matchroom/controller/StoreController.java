@@ -50,7 +50,6 @@ public class StoreController { //
 
 		int result = service.storeInsert(vo);
 
-		System.out.println(vo.getStoreList());
 		return "redirect:/user/roomList";
 	}
 

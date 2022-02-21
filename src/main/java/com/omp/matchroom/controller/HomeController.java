@@ -21,7 +21,7 @@ public class HomeController {
 			return "redirect:/user/roomList"; // 로그인정보가 있을 경우
 		}
 
-		return "login/login"; // 로그인 페이지
+		return "web/index"; // 로그인 페이지
 	}
 
 }
