@@ -1,5 +1,7 @@
 package com.omp.matchroom.vo;
 
+import org.mybatis.spring.annotation.MapperScan;
+
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
@@ -9,6 +11,7 @@ import lombok.ToString;
 @ToString
 @Getter
 @Setter
+@MapperScan
 public class StoreVO {
 
 	private String storeId;
