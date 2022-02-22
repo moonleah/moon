@@ -8,8 +8,7 @@
 <!-- <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> -->
 <meta name="naver-site-verification" content="1ab5417a8f499f482c8163a4a0e6ce9e956c9b82"/>
 <meta name="viewport"    content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<meta name="title"       content="E-ZDS">
-<meta name="description" content="자동차진단기 전문기업" >
+<meta name="title"       content="privatRoom">
 <meta name="theme-color" content="#eeeeee">
 <meta name="format-detection" content="telephone=no"/>
 

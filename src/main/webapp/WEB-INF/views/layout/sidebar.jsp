@@ -36,18 +36,16 @@
             </li>
             
              <!-- Divider -->
-            <hr class="sidebar-divider">
             <!-- Heading -->
 
         </ul>
         <!-- End of Sidebar -->
         
         <script>
-     /*    $(document).ready(function() {
-        	$("#accordionSidebar").click(function () {
+        $(document).ready(function() {
+        	$(".nav-item").click(function () {
         	    $(".nav-item").removeClass("active");
-        	     $(".nav-item").addClass("active"); // instead of this do the below 
         	    $(this).addClass("active");   
         	});
-        	}); */
+        	}); 
         </script>
