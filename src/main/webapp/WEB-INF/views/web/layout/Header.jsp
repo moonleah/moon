@@ -15,7 +15,7 @@
                     <div class="icon p-2 me-2">
                         <img class="img-fluid" src="${pageContext.request.contextPath}/web/img/icon-deal.png" alt="Icon" style="width: 30px; height: 30px;">
                     </div>
-                    <h1 class="m-0 text-primary">Sichago</h1><small class="text-primary">식하고</small>
+                    <h1 class="m-0 text-primary">Comfortable</h1><small class="text-primary">meal</small>
                 </a>
                 <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
                     <span class="navbar-toggler-icon"></span>
@@ -24,7 +24,7 @@
                     <div class="navbar-nav ms-auto">
                         <a href="index" class="nav-item nav-link active">Home</a>
                         <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Property</a>
+                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"></a>
                             <div class="dropdown-menu rounded-0 m-0">
                                 <a href="property-list" class="dropdown-item">Property List</a>
                                 <a href="property-type" class="dropdown-item">Property Type</a>

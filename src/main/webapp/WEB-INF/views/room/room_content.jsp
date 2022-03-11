@@ -142,22 +142,36 @@ function initStoreGrid(){
 			keyExpr:"storeId",
 			selection:"single",
 			pageSize: 40,
-			allowUpdate: false,
+			allowUpdate: true,
 			allowDelete: false,
 			showFilterRow: true,
 			onRowDblClick:function(e){
-				//openMatSubInsert(e.data.mat_id);
+				openStoreInsert(e.data.storeId);
 			},
 			onRowUpdating:function(e){
-				//openMatUpdate(e.data.mat_id);
+				openStoreUpdate(e.data.storeId);
 			},
 			onRowDeleting:function(e){
-			//	matDelete(e.data.mat_id);
+				storeDelete(e.data.storeId);
 			},
 			/* onSelectionChanged:function(e){
 			} */
 		}).easiGrid("instance");
 	}
+	
+	function openStoreInsert(id){
+		   var _width = '650';
+		   var _height = '800';
+		   var _left = Math.ceil(( window.screen.width - _width )/2);
+		   var _top = Math.ceil(( window.screen.height - _height )/2); 
+		   var win = window.open("roomInsertForm?storeId="+id, "PopupWin",  
+		    		'width='+ _width +', height='+ _height +', left=' + _left + ', top='+ _top) 
+		
+	};
+	
+	function openStoreUpdate(id){};
+	
+	function storeDelete(id){};
 	
 	function getStoreList(){
 		
