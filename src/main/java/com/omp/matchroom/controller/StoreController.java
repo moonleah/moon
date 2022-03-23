@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.omp.matchroom.service.StoreService;
 import com.omp.matchroom.vo.RestResultVO;
+import com.omp.matchroom.vo.StoreVO;
 
 @Controller
 public class StoreController { //
@@ -55,8 +56,12 @@ public class StoreController { //
 	}
 
 	@GetMapping(value = "/user/roomInsertForm")
-	public String insertForm(@Validated RestResultVO vo, Model model, HttpServletRequest request,
+	public String insertForm(@Validated StoreVO vo, Model model, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
+		System.out.println(vo.getStoreId());
+
+		StoreVO storeData = service.getStoreDetail(vo.getStoreId());
+		model.addAttribute("storeData", storeData);
 
 		return "room/room_insert";
 	}

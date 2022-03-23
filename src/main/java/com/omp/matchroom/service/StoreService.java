@@ -13,4 +13,6 @@ public interface StoreService {
 
 	int storeInsert(RestResultVO vo) throws Exception;
 
+	StoreVO getStoreDetail(String storeId) throws Exception;
+
 }

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 
 import com.omp.matchroom.mapper.StoreMapper;
 import com.omp.matchroom.vo.RestResultVO;
+import com.omp.matchroom.vo.StoreVO;
 
 @Component
 public class StoreDAO {
@@ -21,6 +22,10 @@ public class StoreDAO {
 	public int storeInsert(RestResultVO vo) throws Exception {
 		// TODO Auto-generated method stub
 		return mapper.storeInsert(vo);
+	}
+
+	public StoreVO getStoreDetail(String storeId) throws Exception {
+		return mapper.getStoreDetail(storeId);
 	}
 
 }

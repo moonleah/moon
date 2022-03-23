@@ -45,5 +45,11 @@
   	
   	</insert>
   	
+  	<select id="getStoreDetail" parameterType="String" resultType="StoreVO">
+  	SELECT  store_id , store_type_name , pms_num , store_name, owner_name, store_address_road , store_address , store_area , postal_code
+  	  FROM  omp_store
+  	 WHERE  store_id = #{storeId} 
+  	 
+	</select>
 
 </mapper>

@@ -1,156 +1,179 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!DOCTYPE html>
 <html lang="ko">
 <head>
-  <title>파일업로드예제</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Start Up</title>
+
+    <style type="text/css">
+
+        input[type=file] {
+            display: none;
+        }
+
+        .my_button {
+            display: inline-block;
+            width: 200px;
+            text-align: center;
+            padding: 10px;
+            background-color: #006BCC;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+
+
+        .imgs_wrap {
+
+            border: 2px solid #A8A8A8;
+            margin-top: 30px;
+            margin-bottom: 30px;
+            padding-top: 10px;
+            padding-bottom: 10px;
+
+        }
+        .imgs_wrap img {
+            max-width: 150px;
+            margin-left: 10px;
+            margin-right: 10px;
+        }
+
+    </style>
+
+	<script src="${pageContext.request.contextPath}/static/vendor/jquery/jquery.min.js"></script>
+    <script type="text/javascript">
+
+        // 이미지 정보들을 담을 배열
+        var sel_files = [];
+
+
+        $(document).ready(function() {
+            $("#input_imgs").on("change", handleImgFileSelect);
+        }); 
+
+        function fileUploadAction() {
+            console.log("fileUploadAction");
+            $("#input_imgs").trigger('click');
+        }
+
+        function handleImgFileSelect(e) {
+
+            // 이미지 정보들을 초기화
+            sel_files = [];
+            $(".imgs_wrap").empty();
+
+            var files = e.target.files;
+            var filesArr = Array.prototype.slice.call(files);
+
+            var index = 0;
+            filesArr.forEach(function(f) {
+                if(!f.type.match("image.*")) {
+                    alert("확장자는 이미지 확장자만 가능합니다.");
+                    return;
+                }
+
+                sel_files.push(f);
+
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    var html = "<a href=\"javascript:void(0);\" onclick=\"deleteImageAction("+index+")\" id=\"img_id_"+index+"\"><img src=\"" + e.target.result + "\" data-file='"+f.name+"' class='selProductFile' title='Click to remove'></a>";
+                    $(".imgs_wrap").append(html);
+                    index++;
+
+                }
+                reader.readAsDataURL(f);
+                
+            });
+        }
+
+
+
+        function deleteImageAction(index) {
+            console.log("index : "+index);
+            console.log("sel length : "+sel_files.length);
+
+            sel_files.splice(index, 1);
+
+            var img_id = "#img_id_"+index;
+            $(img_id).remove(); 
+        }
+
+        function fileUploadAction() {
+            console.log("fileUploadAction");
+            $("#input_imgs").trigger('click');
+        }
+
+        function submitAction() {
+            console.log("업로드 파일 갯수 : "+sel_files.length);
+            var formData = new FormData();
+
+            for(var i=0, len=sel_files.length; i<len; i++) {
+                var name = "image_"+i;
+                formData.append(name, sel_files[i]);
+            }
+            formData.append("image_count", sel_files.length);
+            
+            if(sel_files.length < 1) {
+                alert("한개이상의 파일을 선택해주세요.");
+                return;
+            }           
+			console.log(formData)
+            
+            $.ajax({
+         	      type: "POST",
+         	   	  enctype: "multipart/form-data",
+         	      url: "/user/upRoomInfo",
+             	  data : formData,
+             	  contentType: false,
+                  processData: false,
+                  async: false,
+                  crossDomain: true,
+         	      success: function (data) {
+         	    	if(JSON.parse(data)['result'] == "OK"){
+         	    		alert("파일업로드 성공");
+      			} else
+      				alert("서버내 오류로 처리가 지연되고있습니다. 잠시 후 다시 시도해주세요");
+         	      },
+         	      error: function (xhr, status, error) {
+         	    	alert("서버오류로 지연되고있습니다. 잠시 후 다시 시도해주시기 바랍니다.");
+         	     return false;
+         	      }
+         	    });
+         	    return false;
+      	}
+
+
+    </script>
 </head>
+
 <body>
+	<form id="frm" name="frm" method="post"  action="/user/upRoomInfo" enctype="multipart/form-data">	
+    <div>
+        <label>store Name : </label><input type="text" name="storeName" value="${storeData.storeName}"  readonly/> <br>
+   	 	<label>room Name : </label><input type="text" class="roomName" name="roomName"  /> <br>
+    	<label>수용인원 : </label><input type="text" class="roomCapacity" name="roomCapacity" /> <br>
+   <h2><b>이미지 미리보기</b></h2>
+        <div class="input_wrap">
+            <a href="javascript:" onclick="fileUploadAction();" class="my_button">파일 업로드</a>
+            <input type="file" name="files" id="input_imgs" multiple/>
+        </div>
+    </div>
 
-<div class="container">
-  <h2>Room 정보 추가하기</h2>
-  <form name="dataForm" id="dataForm" onsubmit="return registerAction()">
-  	<div id="insertDiv">
-	  	<label>store Name : </label><input type="text" name="r_store_name" id="r_store_name"  /> <br>
-	  	<label>room Name : </label><input type="text" class="roomName" name="roomName"  /> <br>
-	  	<label>capacity    : </label><input type="text" class="roomCapacity" name="roomCapacity" /> <br>
-	  	<button id="btn-upload" type="button" style="border: 1px solid #ddd; outline: none;">파일 추가</button>
-	  	<input id="input_file" multiple="multiple" type="file" style="display:none;">
-	  	<span style="font-size:10px; color: gray;">※첨부파일은 최대 10개까지 등록이 가능합니다.</span>
-	  	<div class="data_file_txt" class="fileDiv"id="data_file_txt" style="margin:40px;">
-			<!-- <span>첨부 파일</span>
-			<br /> -->
-			<div id="articlefileChange">
-			</div>
-		</div>
-	</div>
-	<div id="plusInsert">
-	
-	</div>
+    <div>
+        <div class="imgs_wrap">
+            <img id="img" />
+        </div>
+    </div>
 
-  	<button type="submit" style="border: 1px solid #ddd; outline: none;">전송</button>
-  	<button type="button" id="addBtn" style="border: 1px solid #ddd; outline: none;">추가</button>
-  	
-  </form>
-</div>
-
-
-<!-- 파일 업로드 스크립트 -->
-<script type="application/javascript" >
-$(document).ready(function()
-		// input file 파일 첨부시 fileCheck 함수 실행
-		{
-			$("#input_file").on("change", fileCheck);
-		});
-
-/**
- * 첨부파일로직
- */
-$(function () {
-    $('#btn-upload').click(function (e) {
-        e.preventDefault();
-        $('#input_file').click();
-    });
-});
-
-// 파일 현재 필드 숫자 totalCount랑 비교값
-var fileCount = 0;
-// 해당 숫자를 수정하여 전체 업로드 갯수를 정한다.
-var totalCount = 10;
-// 파일 고유넘버
-var fileNum = 0;
-// 첨부파일 배열
-var content_files = new Array();
-
-function fileCheck(e) {
-    var files = e.target.files;
-    
-    // 파일 배열 담기
-    var filesArr = Array.prototype.slice.call(files);
-    
-    // 파일 개수 확인 및 제한
-    if (fileCount + filesArr.length > totalCount) {
-      $.alert('파일은 최대 '+totalCount+'개까지 업로드 할 수 있습니다.');
-      return;
-    } else {
-    	 fileCount = fileCount + filesArr.length;
-    }
-    
-    // 각각의 파일 배열담기 및 기타
-    filesArr.forEach(function (f) {
-      var reader = new FileReader();
-      reader.onload = function (e) {
-        content_files.push(f);
-        $('#articlefileChange').append(
-       		'<div id="file' + fileNum + '" onclick="fileDelete(\'file' + fileNum + '\')">'
-       		+ '<font style="font-size:12px">' + f.name + '</font>'  
-       		+ '<img src="${pageContext.request.contextPath}/static/img/icon_minus.png" style="width:15px; height:auto; vertical-align: middle; cursor: pointer;"/>' 
-       		+ '<div/>'
-		);
-        fileNum ++;
-      };
-      reader.readAsDataURL(f);
-    });
-    console.log(content_files);
-    //초기화 한다.
-    $("#input_file").val("");
-  }
-
-// 파일 부분 삭제 함수
-function fileDelete(fileNum){
-    var no = fileNum.replace(/[^0-9]/g, "");
-    content_files[no].is_delete = true;
-	$('#' + fileNum).remove();
-	fileCount --;
-    console.log(content_files);
-}
-
-/*
- * 폼 submit 로직
- */
-	function registerAction(){
-		
-	var form = $("form")[0];        
- 	var formData = new FormData(form);
-		for (var x = 0; x < content_files.length; x++) {
-			// 삭제 안한것만 담아 준다. 
-			if(!content_files[x].is_delete){
-				 formData.append("article_file", content_files[x]);
-			}
-		}
-   /*
-   * 파일업로드 multiple ajax처리
-   */    
-	$.ajax({
-   	      type: "POST",
-   	   	  enctype: "multipart/form-data",
-   	      url: "/file-upload",
-       	  data : formData,
-       	  processData: false,
-   	      contentType: false,
-   	      success: function (data) {
-   	    	if(JSON.parse(data)['result'] == "OK"){
-   	    		alert("파일업로드 성공");
-			} else
-				alert("서버내 오류로 처리가 지연되고있습니다. 잠시 후 다시 시도해주세요");
-   	      },
-   	      error: function (xhr, status, error) {
-   	    	alert("서버오류로 지연되고있습니다. 잠시 후 다시 시도해주시기 바랍니다.");
-   	     return false;
-   	      }
-   	    });
-   	    return false;
-	}
-	
-	 $('#addBtn').click(function (e) {
-	    	let card = $("#insertDiv").clone();
-			$(".plusInsert").appendTo(card);
-	    });
-</script>
+    <!-- <a href="javascript:" class="my_button" onclick="submitAction();">업로드</a> -->
+    <input type="submit" id="submit" value="save" class="btn">
+</form>
 </body>
 </html>
+

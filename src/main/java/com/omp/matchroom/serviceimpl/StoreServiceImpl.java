@@ -32,4 +32,9 @@ public class StoreServiceImpl implements StoreService {
 		return dao.storeInsert(vo);
 	}
 
+	@Override
+	public StoreVO getStoreDetail(String storeId) throws Exception {
+		return dao.getStoreDetail(storeId);
+	}
+
 }
