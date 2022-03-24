@@ -15,14 +15,19 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 
+import com.omp.matchroom.config.auth.PrincipalDetailsService;
+
 @Configuration
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(securedEnabled = true , prePostEnabled =true)
+@EnableGlobalMethodSecurity(securedEnabled = true, prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
 	@Qualifier("dataSource")
 	private DataSource dataSource;
+
+	@Autowired
+	PrincipalDetailsService userDetailsService;
 
 	@Override
 	public void configure(WebSecurity web) throws Exception {
@@ -40,9 +45,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.loginProcessingUrl("/login").defaultSuccessUrl("/");
 
 		/* 자동 로그인 설정 */
-		http.rememberMe().key("zenith") // 쿠키에 사용되는 값을 암호화하기 위한 키(key)값
-				.tokenRepository(persistentTokenRepository()) // DataSource 추가
-				.tokenValiditySeconds(604800); // 토큰 유지 시간(초단위) - 일주일
+		http.rememberMe().key("rememberKey") // 쿠키에 사용되는 값을 암호화하기 위한 키(key)값
+				.userDetailsService(userDetailsService).tokenRepository(tokenRepository()).tokenValiditySeconds(604800); // 토큰
+																															// 유지
+																															// 시간(초단위)
+																															// -
+																															// 일주일
 
 		/* 로그아웃 설정 */
 		http.logout().logoutUrl("/logout").logoutSuccessUrl("/").invalidateHttpSession(true) // 세션 삭제
@@ -56,10 +64,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	}
 
 	@Bean
-	public PersistentTokenRepository persistentTokenRepository() {
-		JdbcTokenRepositoryImpl repo = new JdbcTokenRepositoryImpl();
-		repo.setDataSource(dataSource);
-		return repo;
+	public PersistentTokenRepository tokenRepository() {
+		JdbcTokenRepositoryImpl jdbcTokenRepository = new JdbcTokenRepositoryImpl();
+		jdbcTokenRepository.setDataSource(dataSource);
+		return jdbcTokenRepository;
 	}
 
 }
