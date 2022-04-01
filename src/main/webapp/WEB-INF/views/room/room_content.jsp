@@ -164,7 +164,7 @@ function initStoreGrid(){
 		   var _height = '800';
 		   var _left = Math.ceil(( window.screen.width - _width )/2);
 		   var _top = Math.ceil(( window.screen.height - _height )/2); 
-		   var win = window.open("roomInsertForm?storeId="+id, "PopupWin",  
+		   var win = window.open("roomInsert?storeId="+id, "PopupWin",  
 		    		'width='+ _width +', height='+ _height +', left=' + _left + ', top='+ _top) 
 		
 	};

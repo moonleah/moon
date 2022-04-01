@@ -11,6 +11,7 @@
    			<typeAlias type="com.omp.matchroom.vo.StoreVO" alias="StoreVO"/>
    			<typeAlias type="com.omp.matchroom.vo.RestResultVO" alias="RestResultVO"/>
    			<typeAlias type="com.omp.matchroom.vo.UserVO" alias="UserVO"/>
+   			<typeAlias type="com.omp.matchroom.vo.RoomVO" alias="RoomVO"/>
 	</typeAliases>
 	
 </configuration>

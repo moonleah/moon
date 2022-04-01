@@ -17,8 +17,9 @@ public class UploadController { //
 	@RequestMapping("/user/upRoomInfo")
 	public String insertBoard(RoomVO roomVO, MultipartHttpServletRequest multipartHttpServletRequest) throws Exception {
 
-		service.insertBoard(roomVO, multipartHttpServletRequest);
-		return "/";
+		service.insertRoom(roomVO, multipartHttpServletRequest);
+
+		return "redirect:/user/roomList";
 	}
 
 }

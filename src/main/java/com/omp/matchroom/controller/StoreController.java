@@ -55,7 +55,7 @@ public class StoreController { //
 		return "redirect:/user/roomList";
 	}
 
-	@GetMapping(value = "/user/roomInsertForm")
+	@GetMapping(value = "/user/roomInsert")
 	public String insertForm(@Validated StoreVO vo, Model model, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 		System.out.println(vo.getStoreId());

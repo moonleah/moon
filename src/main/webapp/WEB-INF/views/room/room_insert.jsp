@@ -155,9 +155,11 @@
 <body>
 	<form id="frm" name="frm" method="post"  action="/user/upRoomInfo" enctype="multipart/form-data">	
     <div>
+    	<input type="hidden" name="storeName" value="${storeData.storeId}" />
         <label>store Name : </label><input type="text" name="storeName" value="${storeData.storeName}"  readonly/> <br>
    	 	<label>room Name : </label><input type="text" class="roomName" name="roomName"  /> <br>
     	<label>수용인원 : </label><input type="text" class="roomCapacity" name="roomCapacity" /> <br>
+    	<label>사용여부 : </label>Y<input type="radio" class="useFlag" name="useFlag" value="Y"/>N<input type="radio" class="useFlag" name="useFlag" value="N"/> <br>
    <h2><b>이미지 미리보기</b></h2>
         <div class="input_wrap">
             <a href="javascript:" onclick="fileUploadAction();" class="my_button">파일 업로드</a>

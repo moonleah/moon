@@ -2,6 +2,7 @@ package com.omp.matchroom.serviceimpl;
 
 import java.io.File;
 import java.io.IOException;
+import java.security.Principal;
 import java.util.Iterator;
 import java.util.List;
 
@@ -21,8 +22,10 @@ public class UploadServiceImpl implements UploadService {
 	UploadDAO dao;
 
 	@Override
-	public void insertBoard(RoomVO roomVO, MultipartHttpServletRequest multipartHttpServletRequest) throws Exception {
+	public void insertRoom(RoomVO roomVO, MultipartHttpServletRequest multipartHttpServletRequest) throws Exception {
 		System.out.println("RoomVO : " + roomVO);
+
+		dao.insertRoom(roomVO);
 		String path = "C:\\image\\";
 
 		if (ObjectUtils.isEmpty(multipartHttpServletRequest) == false) {
@@ -34,11 +37,6 @@ public class UploadServiceImpl implements UploadService {
 				System.out.println("File name tag : " + name);
 				List<MultipartFile> fileList = multipartHttpServletRequest.getFiles(name);
 				for (MultipartFile multipartFile : fileList) {
-					System.out.println("--- start file ---");
-					System.out.println("File name : " + multipartFile.getOriginalFilename());
-					System.out.println("File size : " + multipartFile.getSize());
-					System.out.println("File content-type : " + multipartFile.getContentType());
-					System.out.println("--- end file ---");
 
 					// 파일을 폴더에 저장
 					String safeFile = path + System.currentTimeMillis() + multipartFile.getOriginalFilename();
@@ -54,6 +52,9 @@ public class UploadServiceImpl implements UploadService {
 					}
 
 				}
+
+				System.out.println("fileList : " + fileList);
+
 			}
 		}
 

@@ -6,6 +6,6 @@ import com.omp.matchroom.vo.RoomVO;
 
 public interface UploadService {
 
-	void insertBoard(RoomVO roomVO, MultipartHttpServletRequest multipartHttpServletRequest) throws Exception;
+	void insertRoom(RoomVO roomVO, MultipartHttpServletRequest multipartHttpServletRequest) throws Exception;
 
 }

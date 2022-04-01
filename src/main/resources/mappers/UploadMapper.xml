@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.omp.matchroom.mapper.UploadMapper">
+  		
+    
+    <insert id="insertRoom" parameterType="RoomVO">
+    INSERT INTO omp_room(store_id ,r_store_name, room_name, room_capacity, use_flag)
+    VALUES      ( #{storeId}, #{storeName}, #{roomName}, #{roomCapacity},  #{useFlag})
+    </insert>
+
+	<select id="getRoomKey" parameterType="RoomVO" resultType="RoomVO">
+		select * from omp_room where store_id = #{storeId} and store_name  
+	
+	</select>
+
+
+</mapper>

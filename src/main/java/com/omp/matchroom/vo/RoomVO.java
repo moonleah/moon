@@ -14,8 +14,10 @@ import lombok.ToString;
 @MapperScan
 public class RoomVO {
 
+	private String storeId;
 	private String storeName;
 	private String roomName;
 	private String roomCapacity;
+	private String useFlag;
 
 }
