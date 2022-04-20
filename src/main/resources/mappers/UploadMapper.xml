@@ -6,8 +6,8 @@
   		
     
     <insert id="insertRoom" parameterType="RoomVO">
-    INSERT INTO omp_room(store_id ,r_store_name, room_name, room_capacity, use_flag)
-    VALUES      ( #{storeId}, #{storeName}, #{roomName}, #{roomCapacity},  #{useFlag})
+    INSERT INTO omp_room(store_id ,r_store_name, room_name, room_capacity, useflag , user_email)
+    VALUES      ( #{storeId}, #{storeName}, #{roomName}, #{roomCapacity},  #{useFlag} , #{userEmail})
     </insert>
 
 	<select id="getRoomKey" parameterType="RoomVO" resultType="RoomVO">

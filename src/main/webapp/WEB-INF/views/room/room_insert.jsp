@@ -155,7 +155,7 @@
 <body>
 	<form id="frm" name="frm" method="post"  action="/user/upRoomInfo" enctype="multipart/form-data">	
     <div>
-    	<input type="hidden" name="storeName" value="${storeData.storeId}" />
+    	<input type="hidden" name="storeId" value="${storeData.storeId}" />
         <label>store Name : </label><input type="text" name="storeName" value="${storeData.storeName}"  readonly/> <br>
    	 	<label>room Name : </label><input type="text" class="roomName" name="roomName"  /> <br>
     	<label>수용인원 : </label><input type="text" class="roomCapacity" name="roomCapacity" /> <br>

@@ -15,7 +15,7 @@
                     <div class="icon p-2 me-2">
                         <img class="img-fluid" src="${pageContext.request.contextPath}/web/img/icon-deal.png" alt="Icon" style="width: 30px; height: 30px;">
                     </div>
-                    <h1 class="m-0 text-primary">Comfortable</h1><small class="text-primary">meal</small>
+                    <h1 class="m-0 text-primary">G__D</h1><small class="text-primary">place</small>
                 </a>
                 <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
                     <span class="navbar-toggler-icon"></span>

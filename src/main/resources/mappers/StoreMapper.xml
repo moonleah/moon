@@ -10,6 +10,7 @@
   	FROM omp_store A 
 	LEFT JOIN omp_room B ON A.store_name = B.r_store_name 
   	<include refid="searchFlag"/>
+  	group by A.PMS_NUM
   	order by A.store_id DESC
 	</select>
   

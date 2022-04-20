@@ -14,6 +14,7 @@ import lombok.ToString;
 @MapperScan
 public class RoomVO {
 
+	private String userEmail;
 	private String storeId;
 	private String storeName;
 	private String roomName;

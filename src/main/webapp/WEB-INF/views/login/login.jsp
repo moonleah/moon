@@ -16,7 +16,7 @@
                             <div class="col-lg-6">
                                 <div class="p-5">
                                     <div class="text-center">
-                                        <h1 class="h4 text-gray-900 mb-4">Welcome EZDS ERP!</h1>
+                                        <h1 class="h4 text-gray-900 mb-4">Welcome GD Place!</h1>
                                     </div>
                                     <form class="user" action="/login" method="POST" name="login">
                                         <div class="form-group">

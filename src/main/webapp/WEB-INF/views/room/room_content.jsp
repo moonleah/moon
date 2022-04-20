@@ -127,17 +127,18 @@ function initStoreGrid(){
    			{caption:"상호명", 	dataField:"storeName", 		align:"center", 		  	 width:"300px",      visible: true },
    			{caption:"주소", 	dataField:"storeAddress", 		align:"center", 		  	 width:"300px",      visible: true },
    			{caption:"주소(도로명)", 	dataField:"storeAddressRoad", 		align:"center", 		  	 width:"300px",      visible: true },
-   			{caption:"룸 개수", dataField:"roomId", 	align:"center", 		 width:"100px",   	 	 visible: true },
-   			/* {caption:"",        	dataField:"mat_use", 		align:"center", 		 width:"100px", 		 visible: true,
+   			{caption:"수용인원", 	dataField:"roomCapacity", 	align:"center", 		 width:"100px", 		 visible: true }
+   			/*{caption:"룸 개수", dataField:"roomId", 	align:"center", 		 width:"100px",   	 	 visible: true },
+   			 {caption:"",        	dataField:"mat_use", 		align:"center", 		 width:"100px", 		 visible: true,
    				 customizeText:function(e){
    				    return e.value == 'G001'  ? '사용 중' : '사용 중지';
    			     } 	    			
-   			}, */
+   			},
    			{caption:"방이름", 	dataField:"roomName", 	align:"center", 		 width:"100px", 		 visible: true },
    			{caption:"수용인원", 	dataField:"roomCapacity", 	align:"center", 		 width:"100px", 		 visible: true },
    			{caption:"방상태", 	dataField:"roomStatus", 	align:"center", 		 width:"100px", 		 visible: true },
    			{caption:"사용여부", 	dataField:"useflag", 	align:"center", 		 width:"100px", 		 visible: true },
-   			
+   			 */
    		],
 			keyExpr:"storeId",
 			selection:"single",

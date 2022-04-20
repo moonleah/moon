@@ -1,5 +1,7 @@
 package com.omp.matchroom.controller;
 
+import java.security.Principal;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,7 +17,10 @@ public class UploadController { //
 	private UploadService service;
 
 	@RequestMapping("/user/upRoomInfo")
-	public String insertBoard(RoomVO roomVO, MultipartHttpServletRequest multipartHttpServletRequest) throws Exception {
+	public String insertBoard(Principal principal, RoomVO roomVO,
+			MultipartHttpServletRequest multipartHttpServletRequest) throws Exception {
+
+		roomVO.setUserEmail(principal.getName().toString());
 
 		service.insertRoom(roomVO, multipartHttpServletRequest);
 
